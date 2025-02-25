@@ -9,7 +9,7 @@ import requests
 import google.generativeai as genai  # Import Gemini API
 
 # Initialize Gemini API
-genai.configure(api_key="YOUR_GEMINI_API_KEY")
+# genai.configure(api_key="AIzaSyCAlGGqqxotMGYOEBBrf9E_FDkU-ZC0Ucc")
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
@@ -22,8 +22,8 @@ def speak(text):
 
 def ask_gemini(question):
     """Ask Gemini API and return response."""
-    model = genai.GenerativeModel("gemini-pro")  # Use Gemini model
-    response = model.generate_content(question)
+    model = genai.GenerativeModel("gemini-1.5-pro")  # Use Gemini model
+    response = model.generate_content(f"Answer in 2 sentences: {question}")
     return response.text if response else "I don't have an answer for that."
 
 def processCommand(c):
@@ -74,6 +74,7 @@ def processCommand(c):
             speak("No news found.")
     else:
         response = ask_gemini(c)  # Get response from Gemini AI
+        print(response)
         speak(response)
 
 def list_files():
